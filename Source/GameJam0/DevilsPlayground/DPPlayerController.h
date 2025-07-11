@@ -3,16 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/GameInstance.h"
-#include "DPGameInstance.generated.h"
+#include "GameFramework/PlayerController.h"
+#include "DPPlayerController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAMEJAM0_API UDPGameInstance : public UGameInstance
+class GAMEJAM0_API ADPPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
-	virtual void OnStart() override;
+	
 };

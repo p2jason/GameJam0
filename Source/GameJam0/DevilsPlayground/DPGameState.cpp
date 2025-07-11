@@ -3,3 +3,7 @@
 
 #include "DevilsPlayground/DPGameState.h"
 
+void ADPGameState::BeginPlay()
+{
+	Super::BeginPlay();
+}

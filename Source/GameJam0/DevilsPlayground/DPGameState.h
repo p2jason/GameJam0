@@ -13,5 +13,6 @@ UCLASS()
 class GAMEJAM0_API ADPGameState : public AGameStateBase
 {
 	GENERATED_BODY()
-	
+
+	virtual void BeginPlay() override;
 };

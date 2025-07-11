@@ -3,3 +3,7 @@
 
 #include "DevilsPlayground/DPGameInstance.h"
 
+void UDPGameInstance::OnStart()
+{
+	Super::OnStart();
+}

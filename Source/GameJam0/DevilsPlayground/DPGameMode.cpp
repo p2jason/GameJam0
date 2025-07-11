@@ -3,3 +3,7 @@
 
 #include "DevilsPlayground/DPGameMode.h"
 
+void ADPGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+}
