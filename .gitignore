@@ -17,7 +17,9 @@
 *
 !*/
 
+# Allow all uassets/umaps. Why is this blocked in the Unreal Engine repo?
 !*.uasset
+!*.umap
 
 # C/C++ source files
 !*.c
