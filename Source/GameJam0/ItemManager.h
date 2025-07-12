@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "ItemManager.generated.h"
 
+enum EItemType : int;
+class AItemBase;
 class AItemSpawn;
 
 UCLASS()
@@ -26,5 +28,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleInstanceOnly)
 	TArray<AActor*> ItemSpawns;
 
-public:	
+	UPROPERTY(BlueprintReadWrite)
+	TArray<AItemBase*> SpawnedItems;
+public:
+	UFUNCTION(BlueprintCallable)
+	AItemBase* FindItemByType(TEnumAsByte<EItemType> Type);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<AItemBase*> GetSpawnedItems(){return SpawnedItems;}
 };

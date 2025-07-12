@@ -17,9 +17,9 @@ void AItemSpawn::BeginPlay()
 	
 }
 
-void AItemSpawn::SpawnItem()
+AItemBase* AItemSpawn::SpawnItem()
 {
 	FActorSpawnParameters params;
 	params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	GetWorld()->SpawnActor<AItemBase>(ItemClass, GetActorLocation(), GetActorRotation(), params);
+	return GetWorld()->SpawnActor<AItemBase>(ItemClass, GetActorLocation(), GetActorRotation(), params);
 }
