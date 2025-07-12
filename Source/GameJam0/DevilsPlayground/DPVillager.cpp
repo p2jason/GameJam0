@@ -29,6 +29,12 @@ void ADPVillager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
+void ADPVillager::SetDirectionVectors(FVector InRight, FVector InForward)
+{
+	Right = InRight;
+	Forward = InForward;
+}
+
 void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -58,6 +64,6 @@ void ADPVillager::Move(const FInputActionValue& Value)
 	
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
-	AddMovementInput(GetActorRightVector(), MovementVector.X);
-	AddMovementInput(GetActorForwardVector(), MovementVector.Y);
+	AddMovementInput(Right, MovementVector.X);
+	AddMovementInput(Forward, MovementVector.Y);
 }

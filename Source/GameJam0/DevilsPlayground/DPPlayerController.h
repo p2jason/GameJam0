@@ -34,4 +34,8 @@ protected:
 	virtual void SetupInputComponent() override;
 
 	virtual void OnPossess(APawn* InPawn) override;
+
+private:
+	UPROPERTY()
+	TObjectPtr<ACameraActor> WorldCamera = nullptr;
 };

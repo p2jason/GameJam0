@@ -19,6 +19,8 @@ public:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
+	void SetDirectionVectors(FVector InRight, FVector InForward);
+	
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	bool bCanControl = true;
@@ -37,4 +39,6 @@ private:
 
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void Move(const FInputActionValue& Value);
+
+	FVector Right, Forward;
 };
