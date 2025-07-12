@@ -4,12 +4,16 @@
 
 #include "DPPlayerController.h"
 #include "EnhancedInputComponent.h"
+#include "ItemBase.h"
 
 ADPVillager::ADPVillager(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
+
+	ItemMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Item Mesh"));
+	ItemMeshComponent->SetupAttachment(RootComponent);
 	
  	PrimaryActorTick.bCanEverTick = true;
 }
@@ -48,6 +52,33 @@ void ADPVillager::SetDirectionVectors(FVector InRight, FVector InForward)
 	Forward = InForward;
 }
 
+void ADPVillager::ReplaceHeldItem(AItemBase* NewItem)
+{
+	if(HeldItem)
+	{
+		//ThrowItem();
+		HeldItem->SetActorHiddenInGame(false);
+		HeldItem->SetActorTransform(NewItem->GetTransform());
+	}
+	NewItem->SetActorHiddenInGame(true);
+	
+	HeldItem = NewItem;
+
+	OnItemPickUpDelegate.Broadcast(HeldItem);
+	
+	ItemMeshComponent->SetStaticMesh(HeldItem->ItemMesh->GetStaticMesh());
+}
+
+AItemBase* ADPVillager::RemoveHeldItem()
+{
+	AItemBase* Out = HeldItem;
+	Out->SetActorHiddenInGame(false);
+	ItemMeshComponent->SetStaticMesh(nullptr);
+	HeldItem = nullptr;
+	OnItemPickUpDelegate.Broadcast(HeldItem);
+	return Out;
+}
+
 void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -58,6 +89,13 @@ void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ADPVillager::Interact);
 		EnhancedInputComponent->BindAction(AbilityAction, ETriggerEvent::Started, this, &ADPVillager::UseAbility);
 	}
+}
+
+void ADPVillager::ThrowItem()
+{
+	HeldItem->SetActorTransform(GetActorTransform());
+	HeldItem->SetActorLocation( HeldItem->GetActorLocation() + HeldItem->GetActorForwardVector() * 1000.0f);
+	HeldItem->SetActorHiddenInGame(false);
 }
 
 void ADPVillager::OnActorClicked(AActor* TouchedActor, FKey ButtonPressed)

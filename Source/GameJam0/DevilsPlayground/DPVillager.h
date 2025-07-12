@@ -6,9 +6,11 @@
 #include "GameFramework/Character.h"
 #include "DPVillager.generated.h"
 
+class AItemBase;
 class UInputAction;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDPOnInteract);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDPItemPickUp, AItemBase*, NewItem);
 
 UCLASS()
 class GAMEJAM0_API ADPVillager : public ACharacter
@@ -26,9 +28,22 @@ public:
 	void SetDirectionVectors(FVector InRight, FVector InForward);
 
 	FDPOnInteract OnInteractDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FDPItemPickUp OnItemPickUpDelegate;
 	
 	float GetRemainingLife() const { return RemainingLife; }
+	
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	AItemBase* GetHeldItem(){return HeldItem;}
 
+	//Use this for when picking up new items, should properly swap items around
+	UFUNCTION(BlueprintCallable)
+	void ReplaceHeldItem(AItemBase* NewItem);
+
+	//Use this when you want to remove the item from player without replacing it, such as for objectives maybe idk
+	UFUNCTION(BlueprintCallable)
+	AItemBase* RemoveHeldItem();
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	bool bCanControl = true;
@@ -44,11 +59,20 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> StaticMesh;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMeshComponent> ItemMeshComponent;
+	
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	AItemBase* HeldItem;
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void UseAbility();
+
+	UFUNCTION(BlueprintCallable)
+	void ThrowItem();
 
 private:
 	UFUNCTION()

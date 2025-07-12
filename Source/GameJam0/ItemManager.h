@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ItemBase.h"
 #include "GameFramework/Actor.h"
 #include "ItemManager.generated.h"
 
-enum EItemType : int;
 class AItemBase;
 class AItemSpawn;
 

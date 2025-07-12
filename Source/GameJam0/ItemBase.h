@@ -32,9 +32,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly)
-	UStaticMeshComponent* ItemMesh;
-	
-	UPROPERTY(EditDefaultsOnly)
 	USphereComponent* SphereCollision;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
@@ -42,6 +39,9 @@ protected:
 
 
 public:
+	UPROPERTY(EditDefaultsOnly)
+	UStaticMeshComponent* ItemMesh;
+	
 	UPROPERTY(EditDefaultsOnly)
 	TEnumAsByte<EItemType> ItemType;
 };
