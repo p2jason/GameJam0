@@ -79,6 +79,18 @@ AItemBase* ADPVillager::RemoveHeldItem()
 	return Out;
 }
 
+void ADPVillager::PossessedBy(AController* NewController)
+{
+	if (!IsValid(Cast<ADPPlayerController>(NewController))) return;
+
+	StaticMesh->SetRenderCustomDepth(true);
+}
+
+void ADPVillager::UnPossessed()
+{
+	StaticMesh->SetRenderCustomDepth(false);
+}
+
 void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);

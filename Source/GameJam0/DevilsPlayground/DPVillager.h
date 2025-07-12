@@ -44,6 +44,7 @@ public:
 	//Use this when you want to remove the item from player without replacing it, such as for objectives maybe idk
 	UFUNCTION(BlueprintCallable)
 	AItemBase* RemoveHeldItem();
+
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	bool bCanControl = true;
@@ -65,7 +66,11 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	AItemBase* HeldItem;
-	
+
+	virtual void PossessedBy(AController* NewController) override;
+
+	virtual void UnPossessed() override;
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
 	UFUNCTION(BlueprintImplementableEvent)
