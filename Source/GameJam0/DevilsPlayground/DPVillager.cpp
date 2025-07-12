@@ -52,7 +52,7 @@ void ADPVillager::OnActorClicked(AActor* TouchedActor, FKey ButtonPressed)
 
 	const UWorld* World = GetWorld();
 	if (!IsValid(World)) return;
-	
+
 	ADPPlayerController* PlayerController = Cast<ADPPlayerController>(World->GetFirstPlayerController());
 	if (!IsValid(PlayerController)) return;
 
@@ -67,6 +67,10 @@ void ADPVillager::Move(const FInputActionValue& Value)
 
 	AddMovementInput(Right, MovementVector.X);
 	AddMovementInput(Forward, MovementVector.Y);
+
+	//float Rotation = MovementVector.Normalize() * 360.f;
+
+	//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Yellow, GetActorRotation().ToString());
 }
 
 void ADPVillager::Interact(const FInputActionValue& Value)
