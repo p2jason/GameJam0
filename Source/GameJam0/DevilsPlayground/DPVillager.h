@@ -8,6 +8,8 @@
 
 class UInputAction;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDPOnInteract)
+
 UCLASS()
 class GAMEJAM0_API ADPVillager : public ACharacter
 {
@@ -20,6 +22,8 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	void SetDirectionVectors(FVector InRight, FVector InForward);
+
+	FDPOnInteract OnInteractDelegate;
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)
@@ -27,6 +31,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input")
 	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input")
+	UInputAction* InteractAction;
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> StaticMesh;
@@ -37,8 +44,11 @@ private:
 	UFUNCTION()
 	void OnActorClicked(AActor* TouchedActor, FKey ButtonPressed);
 
-	UFUNCTION(BlueprintCallable, Category="Input")
+	UFUNCTION()
 	virtual void Move(const FInputActionValue& Value);
 
+	UFUNCTION()
+	virtual void Interact(const FInputActionValue& Value);
+	
 	FVector Right, Forward;
 };

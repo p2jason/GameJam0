@@ -42,6 +42,7 @@ void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ADPVillager::Move);
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ADPVillager::Interact);
 	}
 }
 
@@ -66,4 +67,9 @@ void ADPVillager::Move(const FInputActionValue& Value)
 
 	AddMovementInput(Right, MovementVector.X);
 	AddMovementInput(Forward, MovementVector.Y);
+}
+
+void ADPVillager::Interact(const FInputActionValue& Value)
+{
+	OnInteractDelegate.Broadcast();
 }
