@@ -21,10 +21,14 @@ public:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	void SetDirectionVectors(FVector InRight, FVector InForward);
 
 	FDPOnInteract OnInteractDelegate;
 	
+	float GetRemainingLife() const { return RemainingLife; }
+
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	bool bCanControl = true;
@@ -35,11 +39,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input")
 	UInputAction* InteractAction;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* AbilityAction;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> StaticMesh;
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
+	UFUNCTION(BlueprintImplementableEvent)
+	void UseAbility();
+
 private:
 	UFUNCTION()
 	void OnActorClicked(AActor* TouchedActor, FKey ButtonPressed);
@@ -51,4 +61,6 @@ private:
 	virtual void Interact(const FInputActionValue& Value);
 	
 	FVector Right, Forward;
+
+	float RemainingLife = 30.f;
 };

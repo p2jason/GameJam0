@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "DevilsPlayground/DPVillager.h"
 
 #include "DPPlayerController.h"
@@ -29,6 +28,20 @@ void ADPVillager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
+void ADPVillager::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (!IsControlled()) return;
+
+	RemainingLife -= DeltaSeconds;
+
+	if (RemainingLife <= 0.f)
+	{
+		Destroy();
+	}
+}
+
 void ADPVillager::SetDirectionVectors(FVector InRight, FVector InForward)
 {
 	Right = InRight;
@@ -43,6 +56,7 @@ void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ADPVillager::Move);
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ADPVillager::Interact);
+		EnhancedInputComponent->BindAction(AbilityAction, ETriggerEvent::Started, this, &ADPVillager::UseAbility);
 	}
 }
 
@@ -67,10 +81,6 @@ void ADPVillager::Move(const FInputActionValue& Value)
 
 	AddMovementInput(Right, MovementVector.X);
 	AddMovementInput(Forward, MovementVector.Y);
-
-	//float Rotation = MovementVector.Normalize() * 360.f;
-
-	//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Yellow, GetActorRotation().ToString());
 }
 
 void ADPVillager::Interact(const FInputActionValue& Value)
