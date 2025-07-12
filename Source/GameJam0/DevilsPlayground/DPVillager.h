@@ -8,7 +8,7 @@
 
 class UInputAction;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDPOnInteract)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDPOnInteract);
 
 UCLASS()
 class GAMEJAM0_API ADPVillager : public ACharacter
