@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonActivatableWidget.h"
-#include "DPActivatableWidget.generated.h"
+#include "GameUIManagerSubsystem.h"
+#include "DPUIManagerSubsystem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAMEJAM0_API UDPActivatableWidget : public UCommonActivatableWidget
+class UDPUIManagerSubsystem : public UGameUIManagerSubsystem
 {
 	GENERATED_BODY()
 	

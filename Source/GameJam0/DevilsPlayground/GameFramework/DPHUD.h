@@ -2,16 +2,22 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+
 #include "DPHUD.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAMEJAM0_API ADPHUD : public AHUD
+class ADPHUD : public AHUD
 {
 	GENERATED_BODY()
+
+protected:
+
+	// Begin AActor
+	virtual void BeginPlay() override;
+	// End AActor
 	
 };
