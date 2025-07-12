@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
 #include "Delegates/DelegateCombinations.h"
+#include "DPVillager.h"
 #include "DPInteractableComponent.generated.h"
 
 // Delegates
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionEvent, AActor*, Interactor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteractionEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GAMEJAM0_API UDPInteractableComponent : public USceneComponent
@@ -40,8 +41,14 @@ private:
 	UPROPERTY(EditAnywhere)
 	USphereComponent* InteractionArea;
 
-	UPROPERTY(EditDefaultsOnly)
-	UStaticMeshComponent* InteractIcon;
+	//UPROPERTY(EditDefaultsOnly)
+	//UStaticMeshComponent* InteractIcon;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	bool bInteractOnOverlap = false;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	bool bShowInteractIconOnOverlap = false;
 
 	AActor* InteractingActor;
 
@@ -54,11 +61,11 @@ private:
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-	void BeginInteraction(AActor* Interactor);
+	void BeginInteraction();
 
 	UFUNCTION()
-	void CancelInteraction(AActor* Interactor);
+	void CancelInteraction();
 
 	UFUNCTION()
-	void EndInteraction(AActor* Interactor);
+	void EndInteraction();
 };

@@ -15,6 +15,9 @@ UDPInteractableComponent::UDPInteractableComponent()
 	// Create and attach a sphere component
 	InteractionArea = CreateDefaultSubobject<USphereComponent>(TEXT("InteractionArea"));
 	InteractionArea->SetupAttachment(this);
+
+	//InteractIcon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractionIcon"));
+	//InteractIcon->SetHiddenInGame(true);
 }
 
 
@@ -42,7 +45,26 @@ void UDPInteractableComponent::OnInteractionAreaBeginOverlap(UPrimitiveComponent
 {
 	UE_LOG(LogInteraction, Verbose, TEXT("Entered Interaction Area"));
 
-	BeginInteraction(OtherActor);
+	InteractingActor = OtherActor;
+
+	if (bShowInteractIconOnOverlap) 
+	{
+		//InteractIcon->SetHiddenInGame(false);
+	}
+
+	if (bInteractOnOverlap) 
+	{
+		BeginInteraction();
+	}
+	else 
+	{
+		ADPVillager* Villager = Cast<ADPVillager>(OtherActor);
+
+		if (Villager)
+		{
+			Villager->OnInteractDelegate.AddDynamic(this, &UDPInteractableComponent::BeginInteraction);
+		}
+	}
 }
 
 void UDPInteractableComponent::OnInteractionAreaEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -50,26 +72,43 @@ void UDPInteractableComponent::OnInteractionAreaEndOverlap(UPrimitiveComponent* 
 {
 	UE_LOG(LogInteraction, Verbose, TEXT("Left Interaction Area"));
 
-	EndInteraction(OtherActor);
-}
+	if (bShowInteractIconOnOverlap)
+	{
+		//InteractIcon->SetHiddenInGame(true);
+	}
 
-void UDPInteractableComponent::BeginInteraction(AActor* Interactor) 
-{	
-	InteractingActor = Interactor;
+	if (bInteractOnOverlap)
+	{
+		EndInteraction();
+	}
+	else 
+	{
+		ADPVillager* Villager = Cast<ADPVillager>(OtherActor);
 
-	OnInteractionBegin.Broadcast(InteractingActor);
-}
-
-void UDPInteractableComponent::CancelInteraction(AActor* Interactor)
-{
-	OnInteractionCancelled.Broadcast(InteractingActor);
+		if (Villager)
+		{
+			Villager->OnInteractDelegate.RemoveDynamic(this, &UDPInteractableComponent::EndInteraction);
+		}
+	}
 
 	InteractingActor = nullptr;
 }
 
-void UDPInteractableComponent::EndInteraction(AActor* Interactor)
+void UDPInteractableComponent::BeginInteraction() 
+{	
+	OnInteractionBegin.Broadcast();
+}
+
+void UDPInteractableComponent::CancelInteraction()
 {
-	OnInteractionEnd.Broadcast(InteractingActor);
+	OnInteractionCancelled.Broadcast();
+
+	InteractingActor = nullptr;
+}
+
+void UDPInteractableComponent::EndInteraction()
+{
+	OnInteractionEnd.Broadcast();
 
 	InteractingActor = nullptr;
 }
