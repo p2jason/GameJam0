@@ -6,6 +6,15 @@
 #include "GameFramework/Actor.h"
 #include "ItemBase.generated.h"
 
+UENUM(Blueprintable)
+enum EItemType
+{
+	Key,
+	Iron,
+	SkeletonKey,
+	Last
+};
+
 class UWidgetComponent;
 class USphereComponent;
 
@@ -31,6 +40,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UWidgetComponent* WidgetComponent;
 
-public:	
 
+public:
+	UPROPERTY(EditDefaultsOnly)
+	TEnumAsByte<EItemType> ItemType;
 };

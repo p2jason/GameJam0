@@ -3,6 +3,7 @@
 
 #include "ItemManager.h"
 
+#include "ItemBase.h"
 #include "ItemSpawn.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -13,9 +14,10 @@ AItemManager::AItemManager()
 
 void AItemManager::PopulateWorld()
 {
-	for (AActor* Spawn : ItemSpawns)
+	for (AActor* Spawner : ItemSpawns)
 	{
-		Cast<AItemSpawn>(Spawn)->SpawnItem();
+		if(AItemBase* SpawnedItem = Cast<AItemSpawn>(Spawner)->SpawnItem(); SpawnedItem->IsValidLowLevel())
+			SpawnedItems.Add(SpawnedItem);
 	}
 }
 
@@ -26,5 +28,13 @@ void AItemManager::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AItemSpawn::StaticClass(), ItemSpawns);
 
 	PopulateWorld();
+}
+
+AItemBase* AItemManager::FindItemByType(TEnumAsByte<EItemType> Type)
+{
+	return *SpawnedItems.FindByPredicate([&](AItemBase* N)
+	{
+		return N->ItemType == Type;
+	});
 }
 

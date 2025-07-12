@@ -27,7 +27,7 @@ protected:
 public:	
 
 	UFUNCTION(BlueprintCallable)
-	void SpawnItem();
+	AItemBase* SpawnItem();
 	
 	UFUNCTION(BlueprintCallable)
 	void SetItemClass(const TSubclassOf<AItemBase> NewClass) {ItemClass = NewClass; }
