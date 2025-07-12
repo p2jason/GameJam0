@@ -17,10 +17,16 @@ public class GameJam0 : ModuleRules
 			"AIModule",
 			"StateTreeModule",
 			"GameplayStateTreeModule",
-			"UMG"
+			"UMG",
+			"GameplayTags",
 		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+		PrivateDependencyModuleNames.AddRange(new string[] { 
+			"CommonUI",
+			"CommonInput",
+			"CommonGame",
+			"CommonUser",
+		});
 
 		PublicIncludePaths.AddRange(new string[] {
 			"GameJam0",
