@@ -41,14 +41,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	USphereComponent* InteractionArea;
 
-	//UPROPERTY(EditDefaultsOnly)
-	//UStaticMeshComponent* InteractIcon;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	bool bInteractOnOverlap = false;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
-	bool bShowInteractIconOnOverlap = false;
 
 	AActor* InteractingActor;
 

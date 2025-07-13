@@ -15,9 +15,6 @@ UDPInteractableComponent::UDPInteractableComponent()
 	// Create and attach a sphere component
 	InteractionArea = CreateDefaultSubobject<USphereComponent>(TEXT("InteractionArea"));
 	InteractionArea->SetupAttachment(this);
-
-	//InteractIcon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractionIcon"));
-	//InteractIcon->SetHiddenInGame(true);
 }
 
 
@@ -47,11 +44,6 @@ void UDPInteractableComponent::OnInteractionAreaBeginOverlap(UPrimitiveComponent
 
 	InteractingActor = OtherActor;
 
-	if (bShowInteractIconOnOverlap) 
-	{
-		//InteractIcon->SetHiddenInGame(false);
-	}
-
 	if (bInteractOnOverlap) 
 	{
 		BeginInteraction();
@@ -71,11 +63,6 @@ void UDPInteractableComponent::OnInteractionAreaEndOverlap(UPrimitiveComponent* 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogInteraction, Verbose, TEXT("Left Interaction Area"));
-
-	if (bShowInteractIconOnOverlap)
-	{
-		//InteractIcon->SetHiddenInGame(true);
-	}
 
 	if (bInteractOnOverlap)
 	{
