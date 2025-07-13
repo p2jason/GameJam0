@@ -45,7 +45,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	EDPWidgetInputMode InputConfig = EDPWidgetInputMode::Default;
 
-	// The desired mouse behaviour when the game gets input.
-	UPROPERTY(EditDefaultsOnly, Category = Input)
+	// The desired mouse capture behaviour when the game gets input.
+	UPROPERTY(EditDefaultsOnly, Category = Input, Meta = (EditCondition = "InputConfig == EDPWidgetInputMode::Game || InputConfig == EDPWidgetInputMode::GameAndMenu"))
 	EMouseCaptureMode GameMouseCaptureMode = EMouseCaptureMode::CapturePermanently;
+
+	// The desired mouse lock behaviour.
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	EMouseLockMode MouseLockMode = EMouseLockMode::LockOnCapture;
 };

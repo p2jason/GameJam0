@@ -11,11 +11,11 @@ TOptional<FUIInputConfig> UDPActivatableWidget::GetDesiredInputConfig() const
 	switch (InputConfig)
 	{
 	case EDPWidgetInputMode::GameAndMenu:
-		return FUIInputConfig(ECommonInputMode::All, GameMouseCaptureMode);
+		return FUIInputConfig(ECommonInputMode::All, GameMouseCaptureMode, MouseLockMode);
 	case EDPWidgetInputMode::Game:
-		return FUIInputConfig(ECommonInputMode::Game, GameMouseCaptureMode);
+		return FUIInputConfig(ECommonInputMode::Game, GameMouseCaptureMode, MouseLockMode);
 	case EDPWidgetInputMode::Menu:
-		return FUIInputConfig(ECommonInputMode::Menu, EMouseCaptureMode::NoCapture);
+		return FUIInputConfig(ECommonInputMode::Menu, EMouseCaptureMode::NoCapture, MouseLockMode);
 	case EDPWidgetInputMode::Default:
 	default:
 		return TOptional<FUIInputConfig>();

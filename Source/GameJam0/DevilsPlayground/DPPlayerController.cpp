@@ -9,6 +9,8 @@
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
 
+#include "DevilsPlayground/GameFramework/DPHUD.h"
+
 ADPPlayerController::ADPPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -70,6 +72,12 @@ void ADPPlayerController::OnPossess(APawn* InPawn)
 	
 	Villager->SetDirectionVectors(WorldCamera->GetActorRightVector(), WorldCamera->GetActorUpVector());
 	SetViewTarget(WorldCamera);
+
+	// Update HUD
+	if (ADPHUD* const HUD = Cast<ADPHUD>(MyHUD))
+	{
+		HUD->OnPossessVillager(Villager);
+	}
 }
 
 void ADPPlayerController::RotateCamera(const FInputActionValue& Value)

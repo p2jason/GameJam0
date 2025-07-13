@@ -6,6 +6,9 @@
 
 #include "DPHUD.generated.h"
 
+class ADPVillager;
+class UDPHUDLayout;
+
 /**
  * 
  */
@@ -14,10 +17,17 @@ class ADPHUD : public AHUD
 {
 	GENERATED_BODY()
 
+public:
+
+	void OnPossessVillager(const ADPVillager* const Villager);
+
 protected:
 
 	// Begin AActor
 	virtual void BeginPlay() override;
 	// End AActor
+
+	// Most of the time the HUD will have a HUDLayout, might as well store a pointer to it
+	TWeakObjectPtr<UDPHUDLayout> WeakHUDLayout;
 	
 };

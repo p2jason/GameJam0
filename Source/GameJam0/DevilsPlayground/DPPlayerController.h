@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
+#include "CommonPlayerController.h"
 #include "InputActionValue.h"
 #include "DPPlayerController.generated.h"
 
@@ -19,7 +19,7 @@ class ADPPawnBase;
  * 
  */
 UCLASS()
-class GAMEJAM0_API ADPPlayerController : public APlayerController
+class GAMEJAM0_API ADPPlayerController : public ACommonPlayerController
 {
 	GENERATED_BODY()
 	

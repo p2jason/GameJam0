@@ -14,6 +14,7 @@
 				"UMG",
 				"CommonUI",
 				"CommonGame",
+				"ModularGameplayActors",
 			]
 		}
 	],
@@ -44,6 +45,10 @@
 		{
 			"Name": "CommonGame",
 			"Enabled": true
-		}
+		},
+		{
+			"Name": "ModularGameplayActors",
+			"Enabled": true
+		},
 	]
 }

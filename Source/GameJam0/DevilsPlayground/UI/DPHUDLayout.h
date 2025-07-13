@@ -6,6 +6,7 @@
 
 #include "DPHUDLayout.generated.h"
 
+class UDPTimedLifeBar;
 
 /**
  * UDPHUDLayout
@@ -22,6 +23,12 @@ public:
 	// Begin UUserWidget
 	virtual void NativeOnInitialized() override;
 	// End UUserWidget
+
+public:
+
+	// Very hacky way of easy access to potential widgets in the layout
+	UPROPERTY(Meta = (BindWidgetOptional))
+	TObjectPtr<UDPTimedLifeBar> TimedLifeBar;
 
 protected:
 

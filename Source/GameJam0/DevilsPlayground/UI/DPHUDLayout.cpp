@@ -6,6 +6,8 @@
 #include "Input/CommonUIInputTypes.h"
 #include "NativeGameplayTags.h"
 
+#include "DevilsPlayground/UI/HUD/DPTimedLifeBar.h"
+
 UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_UI_LAYER_MENU, "UI.Layer.Menu");
 UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_UI_ACTION_ESCAPE, "UI.Action.Escape");
 
