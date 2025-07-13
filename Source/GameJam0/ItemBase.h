@@ -42,6 +42,6 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* ItemMesh;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TEnumAsByte<EItemType> ItemType;
 };
