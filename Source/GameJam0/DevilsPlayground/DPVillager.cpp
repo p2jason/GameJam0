@@ -38,7 +38,7 @@ void ADPVillager::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (!IsControlled()) return;
+	if (!IsPossessed) return;
 
 	RemainingLife -= DeltaSeconds;
 
