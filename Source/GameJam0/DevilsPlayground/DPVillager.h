@@ -67,6 +67,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	AItemBase* HeldItem;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool IsPossessed;
+
 	virtual void PossessedBy(AController* NewController) override;
 
 	virtual void UnPossessed() override;

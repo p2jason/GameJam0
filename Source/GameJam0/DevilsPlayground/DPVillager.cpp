@@ -16,6 +16,8 @@ ADPVillager::ADPVillager(const FObjectInitializer& ObjectInitializer)
 	ItemMeshComponent->SetupAttachment(RootComponent);
 	
  	PrimaryActorTick.bCanEverTick = true;
+
+	IsPossessed = false;
 }
 
 void ADPVillager::BeginPlay()
@@ -84,11 +86,15 @@ void ADPVillager::PossessedBy(AController* NewController)
 	if (!IsValid(Cast<ADPPlayerController>(NewController))) return;
 
 	StaticMesh->SetRenderCustomDepth(true);
+
+	IsPossessed = true;
 }
 
 void ADPVillager::UnPossessed()
 {
 	StaticMesh->SetRenderCustomDepth(false);
+
+	IsPossessed = false;
 }
 
 void ADPVillager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
