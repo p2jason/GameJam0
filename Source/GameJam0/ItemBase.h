@@ -31,7 +31,7 @@ protected:
 
 
 public:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UStaticMeshComponent* ItemMesh;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
