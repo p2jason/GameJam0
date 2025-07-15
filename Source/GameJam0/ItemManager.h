@@ -32,7 +32,7 @@ protected:
 	TArray<AItemBase*> SpawnedItems;
 public:
 	UFUNCTION(BlueprintCallable)
-	AItemBase* FindItemByType(TEnumAsByte<EItemType> Type);
+	AItemBase* FindItemByType(FGameplayTag Tag);
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AItemBase*> GetSpawnedItems(){return SpawnedItems;}

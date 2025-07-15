@@ -30,11 +30,11 @@ void AItemManager::BeginPlay()
 	PopulateWorld();
 }
 
-AItemBase* AItemManager::FindItemByType(TEnumAsByte<EItemType> Type)
+AItemBase* AItemManager::FindItemByType(FGameplayTag Tag)
 {
 	return *SpawnedItems.FindByPredicate([&](AItemBase* N)
 	{
-		return N->ItemType == Type;
+		return N->ItemTag == Tag;
 	});
 }
 

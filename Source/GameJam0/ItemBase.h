@@ -3,17 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "ItemBase.generated.h"
-
-UENUM(Blueprintable)
-enum EItemType
-{
-	Key,
-	Iron,
-	SkeletonKey,
-	Last
-};
 
 class UWidgetComponent;
 class USphereComponent;
@@ -43,5 +35,5 @@ public:
 	UStaticMeshComponent* ItemMesh;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TEnumAsByte<EItemType> ItemType;
+	FGameplayTag ItemTag;
 };
