@@ -21,6 +21,9 @@ public:
 
 	void OnPossessVillager(const ADPVillager* const Villager);
 
+	UFUNCTION(BlueprintCallable)
+	void OnGameEnded(bool bDidWin);
+	
 protected:
 
 	// Begin AActor

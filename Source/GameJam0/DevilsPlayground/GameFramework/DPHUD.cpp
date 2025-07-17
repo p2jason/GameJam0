@@ -34,6 +34,16 @@ void ADPHUD::OnPossessVillager(const ADPVillager* const Villager)
 	}
 }
 
+void ADPHUD::OnGameEnded(bool bDidWin)
+{
+	UDPHUDLayout* const HUDLayout = WeakHUDLayout.Get();
+	if (!ensure(HUDLayout))
+	{
+		return;
+	}
+	HUDLayout->OnGameEnded(bDidWin);
+}
+
 void ADPHUD::BeginPlay()
 {
 	Super::BeginPlay();

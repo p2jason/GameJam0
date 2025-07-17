@@ -30,6 +30,9 @@ public:
 	UPROPERTY(Meta = (BindWidgetOptional))
 	TObjectPtr<UDPTimedLifeBar> TimedLifeBar;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnGameEnded(bool bDidWin);
+	
 protected:
 
 	void HandleEscapeAction();
