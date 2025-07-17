@@ -20,6 +20,8 @@ void ADPPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CurrentVillager = nullptr;
+
 	auto Actor = GetWorld()->GetCurrentLevel()->Actors.FindByPredicate(
 		[](const AActor* Actor)
 		{
@@ -69,6 +71,7 @@ void ADPPlayerController::OnPossess(APawn* InPawn)
 
 	ADPVillager* Villager = Cast<ADPVillager>(InPawn);
 	if (!IsValid(Villager)) return;
+	CurrentVillager = Villager;
 	
 	FVector Right = WorldCamera->GetActorRightVector();
 	Right.Z = 0;

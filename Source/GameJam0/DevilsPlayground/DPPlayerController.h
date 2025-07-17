@@ -59,6 +59,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	float PanEdgeRange = 10.f;
 
+	UPROPERTY(BlueprintReadOnly)
+	ADPVillager* CurrentVillager = nullptr;
+
 private:
 	UPROPERTY()
 	TObjectPtr<ACameraActor> WorldCamera = nullptr;
