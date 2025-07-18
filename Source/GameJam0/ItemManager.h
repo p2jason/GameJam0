@@ -31,6 +31,10 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AItemBase*> SpawnedItems;
 public:
+
+	UPROPERTY(EditInstanceOnly)
+	TMap<TSubclassOf<AItemBase>, int> ItemSpawnMap;
+	
 	UFUNCTION(BlueprintCallable)
 	AItemBase* FindItemByType(FGameplayTag Tag);
 
